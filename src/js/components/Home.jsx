@@ -10,16 +10,15 @@ const [tareas, setTareas] = useState([])
 
 
 const handleChange=(event)=>{
-	
- console.log(event);
  setnuevaTarea(event.target.value);
- console.log(nuevaTarea);
 }
 
 const handleSubmit =(e)=>{
 	e.preventDefault();
-	setTareas([...tareas,nuevaTarea])
-	setnuevaTarea('')
+	// setTareas([...tareas,nuevaTarea]);
+tareas.push(nuevaTarea);
+setTareas(tareas);
+setnuevaTarea('');
 }
 	return (
 		<form onSubmit={handleSubmit}>
@@ -30,12 +29,23 @@ const handleSubmit =(e)=>{
 			<input type="text" onChange={handleChange} value={nuevaTarea}/>
 			{/* <input type="text"  defaultValue={tarea} onKeyDown={handleChange}/> */}
 			
-			{/* <div>{tarea}</div> */}
-			<ul>
+			
+			{/* <ul>
+        {tareas.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul> */}
+
+
+	<ul>
         {tareas.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
       </ul>
+
+
+
+
 		</div>
 		</form>
 	);
