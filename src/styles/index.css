@@ -9,3 +9,44 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+ul li{
+    border: 2px solid #e9ecef;
+    list-style: none;
+    padding: 5px;
+    color: rgb(104, 102, 102);
+    font-size: 20px;
+    padding-left: 20px;
+}
+h1{
+    text-align: center;
+}
+input{
+    border: none;
+    width: 100%;
+    color: rgb(104, 102, 102);
+    
+}
+ul {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.total{
+    color:rgb(104, 102, 102);
+}
+.img-of{
+    visibility: hidden;
+}
+.img-on{
+    visibility: visible;
+}
+.delete {
+    float: right;
+    display: none;
+}
+.lista:hover .delete{
+   display: inline-block;
+}
+input:focus {
+  outline: none;
+}

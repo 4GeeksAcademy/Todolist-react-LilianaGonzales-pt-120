@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
 //create your first component
 const Home = () => {
 const [nuevaTarea, setnuevaTarea] = useState('')
@@ -16,36 +13,47 @@ const handleChange=(event)=>{
 const handleSubmit =(e)=>{
 	e.preventDefault();
 	// setTareas([...tareas,nuevaTarea]);
-tareas.push(nuevaTarea);
-setTareas(tareas);
-setnuevaTarea('');
+	const obj={
+		id:Date.now(),// se creo el id para identificar y eliminar
+		task:nuevaTarea
+	}
+	//setTareas([...tareas,obj]);
+	console.log(nuevaTarea);
+	
+	tareas.push(obj);
+	setTareas(tareas);
+	setnuevaTarea('');
+	console.log(tareas);
 }
+const eliminarTarea = (id) => {
+	console.log(id);
+	setTareas(tareas.filter(element=>element.id!=id));
+}
+
+const placeholderText = (tareas.length==0) ? 'No hay tareas, añadir tareas' : '';
 	return (
 		<form onSubmit={handleSubmit}>
-		<div className="text-center">
-            
+		<div className="container">
+			<h1>Todos</h1>
+			<ul>
+				<li>
 
-			<h1 className="text-center mt-5">Todos</h1>
-			<input type="text" onChange={handleChange} value={nuevaTarea}/>
-			{/* <input type="text"  defaultValue={tarea} onKeyDown={handleChange}/> */}
-			
-			
-			{/* <ul>
-        {tareas.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul> */}
+				{/* <input type="text" onChange={handleChange} value={nuevaTarea} placeholder="ingrese nueva tarea"/> */}
+				<input type="text" onChange={handleChange} value={nuevaTarea} placeholder={placeholderText}/>
+				</li>
+				{tareas.map((item, index) => (
+				// <li key={index}>{item.task} <i className="fa-duotone fa-solid fa-xmark img" onClick={()=>eliminarTarea(item.id)}></i></li>
+					<li key={index} className="lista">
+						{item.task}
+						<div className="delete" onClick={()=>eliminarTarea(item.id)} >
+							<i className="fa-duotone fa-solid fa-xmark img"></i>
+						</div>
+						
+					</li>
 
-
-	<ul>
-        {tareas.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-
-
-
-
+				))}
+			</ul>
+			<div className="total">{tareas.length} Items</div>
 		</div>
 		</form>
 	);
