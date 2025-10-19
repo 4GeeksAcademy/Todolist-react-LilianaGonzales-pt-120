@@ -17,13 +17,15 @@ const handleSubmit =(e)=>{
 		id:Date.now(),// se creo el id para identificar y eliminar
 		task:nuevaTarea
 	}
-	//setTareas([...tareas,obj]);
-	console.log(nuevaTarea);
 	
-	tareas.push(obj);
-	setTareas(tareas);
+	if(nuevaTarea!=''){
+		// setTareas([...tareas,obj]);
+		setTareas(prevTareas=> [...prevTareas,obj]);
+		// 	tareas.push(obj);
+		// setTareas(tareas);
 	setnuevaTarea('');
-	console.log(tareas);
+	}
+	
 }
 const eliminarTarea = (id) => {
 	console.log(id);
@@ -32,30 +34,36 @@ const eliminarTarea = (id) => {
 
 const placeholderText = (tareas.length==0) ? 'No hay tareas, añadir tareas' : '';
 	return (
-		<form onSubmit={handleSubmit}>
-		<div className="container">
-			<h1>Todos</h1>
-			<ul>
-				<li>
+		
+		<div className="container-fluid">
+			<div className="row justify-content-center">
+				<div className="col-lg-6 mt-5">
+					<form onSubmit={handleSubmit}>
+						<p>todos</p>
+						<ul>
+							<li>
 
-				{/* <input type="text" onChange={handleChange} value={nuevaTarea} placeholder="ingrese nueva tarea"/> */}
-				<input type="text" onChange={handleChange} value={nuevaTarea} placeholder={placeholderText}/>
-				</li>
-				{tareas.map((item, index) => (
-				// <li key={index}>{item.task} <i className="fa-duotone fa-solid fa-xmark img" onClick={()=>eliminarTarea(item.id)}></i></li>
-					<li key={index} className="lista">
-						{item.task}
-						<div className="delete" onClick={()=>eliminarTarea(item.id)} >
-							<i className="fa-duotone fa-solid fa-xmark img"></i>
-						</div>
-						
-					</li>
+							{/* <input type="text" onChange={handleChange} value={nuevaTarea} placeholder="ingrese nueva tarea"/> */}
+							<input type="text" onChange={handleChange} value={nuevaTarea} placeholder={placeholderText}/>
+							</li>
+							{tareas.map((item, index) => (
+							// <li key={index}>{item.task} <i className="fa-duotone fa-solid fa-xmark img" onClick={()=>eliminarTarea(item.id)}></i></li>
+								<li key={index} className="lista">
+									{item.task}
+									<div className="delete" onClick={()=>eliminarTarea(item.id)} >
+										<i className="fa-duotone fa-solid fa-xmark img"></i>
+									</div>
+									
+								</li>
 
-				))}
-			</ul>
-			<div className="total">{tareas.length} Items</div>
+							))}
+						</ul>
+						<div className="total">{tareas.length} Items</div>
+					</form>
+				</div>
+			</div>
 		</div>
-		</form>
+		
 	);
 };
 
